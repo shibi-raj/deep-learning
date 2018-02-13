@@ -67,5 +67,5 @@ classifier = build_classifier()
 classifier.fit(X_train, y_train, batch_size=10, nb_epoch=100)
 
 ## K-fold CV
-#classifier = KerasClassifier(build_fn=build_classifier, batch_size = 10, nb_epoch = 100)
-#accuracies = cross_val_score(estimator=classifier, X=X_train, y=y_train, cv=10, n_jobs=-1)
+classifier = KerasClassifier(build_fn=build_classifier,  batch_size = 10, nb_epoch = 100)
+accuracies = cross_val_score(estimator=classifier, X=X_train, y=y_train, cv=10, n_jobs=-1)
