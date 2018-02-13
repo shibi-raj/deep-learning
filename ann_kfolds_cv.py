@@ -55,12 +55,17 @@ from keras.layers import Dense
 def build_classifier():
     """Function to build NN classifier """
     classifier = Sequential()
-    classifier.add(Dense(output_dim=6, init='uniform', activation='relu', input_dim=11))
-    classifier.add(Dense(output_dim=6, init='uniform', activation='relu'))
-    classifier.add(Dense(output_dim=1, init='uniform', activation='sigmoid'))
+    classifier.add(Dense(units=6, kernel_initializer='uniform', activation='relu', input_dim=11))
+    classifier.add(Dense(units=6, kernel_initializer='uniform', activation='relu'))
+    classifier.add(Dense(units=1, kernel_initializer='uniform', activation='sigmoid'))
     classifier.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
     return classifier
 
-# K-fold CV
-classifier = KerasClassifier(build_fn=build_classifier, batch_size = 10, nb_epoch = 100)
-accuracies = cross_val_score(estimator=classifier, X=X_train, y=y_train, cv=10, n_jobs=-1)
+classifier = build_classifier()
+
+
+classifier.fit(X_train, y_train, batch_size=10, nb_epoch=100)
+
+## K-fold CV
+#classifier = KerasClassifier(build_fn=build_classifier, batch_size = 10, nb_epoch = 100)
+#accuracies = cross_val_score(estimator=classifier, X=X_train, y=y_train, cv=10, n_jobs=-1)
